@@ -37,3 +37,35 @@ jobs:
           cache: yarn
       - run: yarn --frozen-lockfile
       - run: yarn flow check
+
+  unit_tests:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          cache: yarn
+      - uses: actions-rs/toolchain@v1
+      - uses: Swatinem/rust-cache@v1
+      # Bump max inotify watches
+      - run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p;
+      - run: yarn --frozen-lockfile
+      - run: yarn build-native-release
+      - run: yarn test:unit
+
+  integration_tests:
+    name: Run integration tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          cache: yarn
+      - uses: actions-rs/toolchain@v1
+      - uses: Swatinem/rust-cache@v1
+      # Bump max inotify watches
+      - run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p;
+      - run: yarn --frozen-lockfile
+      - run: yarn build-native-release
+      - run: yarn test:integration-ci
