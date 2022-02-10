@@ -1,6 +1,1 @@
-<svg viewBox="0 0 30 10" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <rect id="square" height="10" width="10" stroke="blue"/>
-  <a xlink:href="other2.html">
-    <use href="#square" x="20" fill="white" stroke="red"/>
-  </a>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 30 10"><rect id="square" width="10" height="10" stroke="#00f"/><a xlink:href="other2.html"><use x="20" fill="#fff" stroke="red" href="#square"/></a></svg>
